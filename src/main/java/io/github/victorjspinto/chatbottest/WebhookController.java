@@ -197,7 +197,7 @@ public class WebhookController {
 		List<Button> buttons = Button.newListBuilder()
 		        .addUrlButton("Ver detalhes", "http://am.olx.com.br/regiao-de-manaus/videogames/vendo-xbox-360-550-r-371694662?xtmc=xbox+360&xtnp=1&xtcr=1").toList()
 		        .addPostbackButton("Ver outras ofertas", "CATEGORY_1").toList()
-		        .addPostbackButton("Fazer nova busca", "SEARCH_PRODUCT").toList()
+		        .addPostbackButton("Fazer nova busca", "SEARCH_PRODUCTS").toList()
 		        .build();
 		
 		 GenericTemplate receipt = GenericTemplate.newBuilder()
