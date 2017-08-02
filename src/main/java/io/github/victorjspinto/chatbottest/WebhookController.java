@@ -302,7 +302,7 @@ public class WebhookController {
 		        .build();
 		
     	try {
-    		String message = "Olá {nome}! Sou seu assistente da OLX. Posso responder dúvidas, ajudar a achar produtos ou desapegar de alguma coisa! O que você deseja fazer?";
+    		String message = "Olá {nome}! Sou seu assistente de um super site de classificados. Posso responder dúvidas, ajudar a achar produtos ou desapegar de alguma coisa! O que você deseja fazer?";
             final ButtonTemplate buttonTemplate = ButtonTemplate.newBuilder(message, buttons).build();
             this.sendClient.sendTemplate(senderId, buttonTemplate);
 		} catch (MessengerApiException | MessengerIOException e) {
