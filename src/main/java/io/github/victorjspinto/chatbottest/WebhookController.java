@@ -32,6 +32,7 @@ import com.github.messenger4j.receive.handlers.TextMessageEventHandler;
 import com.github.messenger4j.send.MessengerSendClient;
 import com.github.messenger4j.send.QuickReply;
 import com.github.messenger4j.send.buttons.Button;
+import com.github.messenger4j.send.templates.ButtonTemplate;
 import com.github.messenger4j.send.templates.GenericTemplate;
 import com.github.messenger4j.send.templates.ReceiptTemplate;
 
@@ -194,7 +195,7 @@ public class WebhookController {
 
 	private void sendStepFiveResponse(String senderId) {
 		List<Button> buttons = Button.newListBuilder()
-		        .addUrlButton("Ver detalhes", "http://lmgtfy.com/?q=Product").toList()
+		        .addUrlButton("Ver detalhes", "http://am.olx.com.br/regiao-de-manaus/videogames/vendo-xbox-360-550-r-371694662?xtmc=xbox+360&xtnp=1&xtcr=1").toList()
 		        .addPostbackButton("Ver outras ofertas", "CATEGORY_1").toList()
 		        .addPostbackButton("Fazer nova busca", "SEARCH_PRODUCT").toList()
 		        .build();
@@ -303,17 +304,16 @@ public class WebhookController {
 	}
 
 	private void sendStepOneResponse(String senderId) {
-    	List<QuickReply> quickreplies = QuickReply.newListBuilder()
-	        	.addTextQuickReply("Procurar produtos", "SEARCH_PRODUCTS")
-	        .toList()
-	        	.addTextQuickReply("Desapegar", "SEARCH_PRODUCTS")
-	        .toList()
-	        	.addTextQuickReply("Tirar dúvidas", "SEARCH_PRODUCTS")
-	        .toList()
-	        .build();
+		List<Button> buttons = Button.newListBuilder()
+				.addPostbackButton("Procurar produtos", "SEARCH_PRODUCTS").toList()
+				.addPostbackButton("Desapegar", "SEARCH_PRODUCTS").toList()
+				.addPostbackButton("Tirar dúvidas", "SEARCH_PRODUCTS").toList()
+		        .build();
+		
     	try {
-			String message = "Olá {nome}! Sou seu assistente da OLX. Posso responder dúvidas, ajudar a achar produtos ou desapegar de alguma coisa! O que você deseja fazer?";
-			sendClient.sendTextMessage(senderId, message, quickreplies);
+    		String message = "Olá {nome}! Sou seu assistente da OLX. Posso responder dúvidas, ajudar a achar produtos ou desapegar de alguma coisa! O que você deseja fazer?";
+            final ButtonTemplate buttonTemplate = ButtonTemplate.newBuilder(message, buttons).build();
+            this.sendClient.sendTemplate(senderId, buttonTemplate);
 		} catch (MessengerApiException | MessengerIOException e) {
 			handleSendException(e);
 		}
