@@ -102,16 +102,10 @@ public class WebhookController {
 		return (event) -> {
 			LOGGER.info("Received message '{}' with text '{}' from user '{}' at '{}'", event.getMid(), event.getText(),
 					event.getSender().getId(), event.getTimestamp());
-			try {
-				if(event.getText().equals("Step1")) {
-					sendStepOneResponse(event.getSender().getId());
-				} else if (event.getText().toLowerCase().equals("recibo")) {
-					sendReceiptTemplate(event.getSender().getId());
-				} else {
-					sendClient.sendTextMessage(event.getSender().getId(), "Olá!");
-				}
-			} catch (MessengerApiException | MessengerIOException e) {
-				handleSendException(e);
+			if (event.getText().toLowerCase().equals("recibo")) {
+				sendReceiptTemplate(event.getSender().getId());
+			} else {
+				sendStepOneResponse(event.getSender().getId());
 			}
 		};
 	}
