@@ -297,7 +297,7 @@ public class WebhookController {
 	private void sendStepOneResponse(String senderId) {
 		List<Button> buttons = Button.newListBuilder()
 				.addPostbackButton("Procurar produtos", "SEARCH_PRODUCTS").toList()
-				.addPostbackButton("Desapegar", "SEARCH_PRODUCTS").toList()
+				.addPostbackButton("Vender", "SEARCH_PRODUCTS").toList()
 				.addPostbackButton("Tirar dúvidas", "SEARCH_PRODUCTS").toList()
 		        .build();
 		
